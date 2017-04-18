@@ -1,3 +1,15 @@
+Before following the regular instructions to run this
+Follow these instructions
+
+This implementation is to just check, how it performs on high resolution dataset, like, camseq.
+Download the camseq dataset and unzip the file in /data/Camseq/
+
+And follow up with running code, it should train on higher resolution images and also run inference to generate higher reslolution
+output.
+
+Download the latest checkpoint folder from the server
+
+
 #pix2pix-tensorflow
 
 TensorFlow implementation of [Image-to-Image Translation Using Conditional Adversarial Networks](https://arxiv.org/pdf/1611.07004v1.pdf) that learns a mapping from input images to output images. 

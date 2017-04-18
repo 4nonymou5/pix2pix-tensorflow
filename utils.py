@@ -10,6 +10,7 @@ import scipy.misc
 import numpy as np
 from time import gmtime, strftime
 
+
 pp = pprint.PrettyPrinter()
 
 get_stddev = lambda x, k_h, k_w: 1/math.sqrt(k_w*k_h*x.get_shape()[-1])
@@ -29,22 +30,24 @@ def load_data(image_path, flip=True, is_test=False):
     return img_AB
 
 def load_image(image_path):
-    input_img = imread(image_path)
-    w = int(input_img.shape[1])
-    w2 = int(w/2)
-    img_A = input_img[:, 0:w2]
-    img_B = input_img[:, w2:w]
-
+   
+    img_A = imread(image_path)
+    imagename = image_path.split('/')[-1]
+    img_B = imread('./datasets/Camseq/'+'Labels/'+imagename.split('.')[0]+'_L.png')
     return img_A, img_B
 
 def preprocess_A_and_B(img_A, img_B, load_size=286, fine_size=256, flip=True, is_test=False):
+    img_A = scipy.misc.imresize(img_A, [720, 960])
+    img_B = scipy.misc.imresize(img_B, [720, 960])
+    """
     if is_test:
         img_A = scipy.misc.imresize(img_A, [fine_size, fine_size])
         img_B = scipy.misc.imresize(img_B, [fine_size, fine_size])
     else:
         img_A = scipy.misc.imresize(img_A, [load_size, load_size])
         img_B = scipy.misc.imresize(img_B, [load_size, load_size])
-
+		
+		
         h1 = int(np.ceil(np.random.uniform(1e-2, load_size-fine_size)))
         w1 = int(np.ceil(np.random.uniform(1e-2, load_size-fine_size)))
         img_A = img_A[h1:h1+fine_size, w1:w1+fine_size]
@@ -52,7 +55,7 @@ def preprocess_A_and_B(img_A, img_B, load_size=286, fine_size=256, flip=True, is
 
         if flip and np.random.random() > 0.5:
             img_A = np.fliplr(img_A)
-            img_B = np.fliplr(img_B)
+            img_B = np.fliplr(img_B)"""
 
     return img_A, img_B
 
